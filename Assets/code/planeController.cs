@@ -5,7 +5,7 @@ using System.Collections;
 public class planeController : MonoBehaviour {
 
 	public GameObject groundFollower;
-
+	public GameObject propShaft;
 
 	public float rollSpeed = 5.0f;
 	public float pitchSpeed = 5.0f;
@@ -37,7 +37,7 @@ public class planeController : MonoBehaviour {
 		myAirspeed = engineRev * 0.2f;
 		//audio = GetComponent<AudioSource>();
 
-		//Screen.lockCursor = true;
+	//Screen.lockCursor = true;
 
 	}
 
@@ -55,6 +55,10 @@ public class planeController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		/*if(Screen.lockCursor){
+			Screen.lockCursor = false;
+		}
+		*/
 		// handle user inputs
 		if (Input.GetKey ("z")) {
 
@@ -94,6 +98,7 @@ public class planeController : MonoBehaviour {
 			//Debug.Log ("corrected roll: "+(360-myRoll));
 		}
 
+		//
 
 		// calculate airspeed
 		if(myAirspeed<(engineRev*0.2f)){
@@ -125,6 +130,9 @@ public class planeController : MonoBehaviour {
 		transform.Translate(Vector3.up * myLift * Time.deltaTime);
 
 
+		// rotate prop
+		//transform.Rotate(0, Time.deltaTime, 0, Space.World);
+		propShaft.transform.Rotate(0.0f,0.0f,engineRev*0.5f,Space.Self);
 		// get roll value 
 	
 
